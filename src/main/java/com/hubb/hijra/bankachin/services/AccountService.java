@@ -22,14 +22,7 @@ public class AccountService {
     }
     public AccountResponse createAccount(Accounts accounts){
           Accounts newAccount =  accountRepositories.save(accounts);
-          AccountResponse newAccountResponse = new AccountResponse();
-          newAccountResponse.setId(newAccount.getId());
-          newAccountResponse.setBalance(newAccount.getBalance());
-          newAccountResponse.setAccountStatus(newAccount.getAccountStatus());
-          newAccountResponse.setAccountNumber(newAccount.getAccountNumber());
-          newAccountResponse.setPhoneNumber(newAccount.getPhoneNumber());
-          newAccountResponse.setCreatedDate(newAccount.getCreatedDate());
-          return newAccountResponse;
+          return new AccountResponse(newAccount);
     }
 
 
@@ -37,14 +30,7 @@ public class AccountService {
     public AccountResponse getAccountByAccountNumber(String accountNumber){
         Accounts account = accountRepositories.findByAccountNumber(accountNumber).orElseThrow(()-> new RuntimeException("account not found"));
 
-        AccountResponse accountResponse = new AccountResponse();
-        accountResponse.setId(account.getId());
-        accountResponse.setBalance(account.getBalance());
-        accountResponse.setAccountStatus(account.getAccountStatus());
-        accountResponse.setAccountNumber(account.getAccountNumber());
-        accountResponse.setPhoneNumber(account.getPhoneNumber());
-        accountResponse.setCreatedDate(account.getCreatedDate());
-        return accountResponse;
+        return new AccountResponse(account);
 
     }
 //     update customer balance
@@ -73,32 +59,13 @@ public class AccountService {
         account.setBalance(balanceAfter);
         accountRepositories.save(account);
 
-
-
-
-        AccountResponse accountResponse = new AccountResponse();
-        accountResponse.setId(account.getId());
-        accountResponse.setBalance(balanceAfter);
-        accountResponse.setAccountStatus(account.getAccountStatus());
-        accountResponse.setAccountNumber(account.getAccountNumber());
-        accountResponse.setPhoneNumber(account.getPhoneNumber());
-        accountResponse.setCreatedDate(account.getCreatedDate());
-
-        return accountResponse;
+        return new  AccountResponse(account);
     }
     public AccountResponse deActivateAccount(String AccountNumber){
          Accounts account = accountRepositories.findByAccountNumber(AccountNumber).orElseThrow(() -> new RuntimeException("Account Not Found!."));
          account.setAccountStatus("InAcive");
          accountRepositories.save(account);
-
-         AccountResponse accountResponse = new AccountResponse();
-         accountResponse.setId(account.getId());
-         accountResponse.setBalance(account.getBalance());
-         accountResponse.setAccountStatus(account.getAccountStatus());
-         accountResponse.setAccountNumber(account.getAccountNumber());
-         accountResponse.setPhoneNumber(account.getPhoneNumber());
-         accountResponse.setCreatedDate(account.getCreatedDate());
-         return accountResponse;
+         return new AccountResponse(account);
 
     }
 
@@ -107,14 +74,8 @@ public class AccountService {
         account.setAccountStatus("Active");
         accountRepositories.save(account);
 
-        AccountResponse accountResponse = new AccountResponse();
-        accountResponse.setId(account.getId());
-        accountResponse.setBalance(account.getBalance());
-        accountResponse.setAccountStatus(account.getAccountStatus());
-        accountResponse.setAccountNumber(account.getAccountNumber());
-        accountResponse.setPhoneNumber(account.getPhoneNumber());
-        accountResponse.setCreatedDate(account.getCreatedDate());
-        return accountResponse;
+        return new AccountResponse(account);
+
     }
 
 }

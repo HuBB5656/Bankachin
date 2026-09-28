@@ -27,8 +27,8 @@ public class AccountControllers {
         return accountService.createAccount(accounts);
     }
 
-    @GetMapping("/get-account-by-account-number")
-    public AccountResponse getAccountByAccountNumber(@RequestParam("accountNumber") String accountNumber){
+    @GetMapping("/get-by-account-number/{accountNumber}")
+    public AccountResponse getAccountByAccountNumber(@PathVariable("accountNumber") String accountNumber){
         return accountService.getAccountByAccountNumber(accountNumber);
     }
 
