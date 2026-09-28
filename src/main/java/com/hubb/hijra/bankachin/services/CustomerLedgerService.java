@@ -1,7 +1,6 @@
 package com.hubb.hijra.bankachin.services;
 
 
-import com.hubb.hijra.bankachin.controllers.dto.CustomerLedgerRequests;
 import com.hubb.hijra.bankachin.models.CustomerLedger;
 import com.hubb.hijra.bankachin.repositories.AccountRepositories;
 import com.hubb.hijra.bankachin.repositories.CustomerLedgerRepository;
@@ -19,8 +18,8 @@ public class CustomerLedgerService {
     private CustomerLedgerRepository customerLedgerRepository;
     private AccountRepositories accountRepositories;
 
-    public CustomerLedger createTrancastionRow(CustomerLedger customerLedger) {
-        return customerLedgerRepository.save(customerLedger);
+    public void createTrancastionRow(CustomerLedger customerLedger) {
+         customerLedgerRepository.save(customerLedger);
     }
     public List<CustomerLedger> gatAccountStatment(String accountNumber){
         accountRepositories.findByAccountNumber(accountNumber).orElseThrow(() -> new RuntimeException("Account number not found"));

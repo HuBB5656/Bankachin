@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,15 +23,6 @@ public class CustomerLedgerRequests {
     private String description;
     private LocalDateTime transactionDate;
 
-    public CustomerLedgerRequests(CustomerLedger customerLedger) {
-        this.account = customerLedger.getAccount();
-        this.balanceBefore = customerLedger.getBalanceBefore();
-        this.amount = customerLedger.getAmount();
-        this.balanceAfter = customerLedger.getBalanceAfter();
-        this.transactionDate = customerLedger.getTransactionDate();
-        this.reference = customerLedger.getReference();
-        this.description = customerLedger.getDescription();
-    }
 
 
 }

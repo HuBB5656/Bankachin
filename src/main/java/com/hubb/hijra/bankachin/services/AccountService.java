@@ -2,7 +2,6 @@ package com.hubb.hijra.bankachin.services;
 
 
 import com.hubb.hijra.bankachin.controllers.dto.AccountResponse;
-import com.hubb.hijra.bankachin.controllers.dto.CustomerLedgerRequests;
 import com.hubb.hijra.bankachin.models.Accounts;
 import com.hubb.hijra.bankachin.models.CustomerLedger;
 import com.hubb.hijra.bankachin.repositories.AccountRepositories;
