@@ -27,6 +27,11 @@ public class AccountControllers {
         return accountService.createAccount(accounts);
     }
 
+    @GetMapping("/get-account-by-account-number")
+    public AccountResponse getAccountByAccountNumber(@RequestParam("accountNumber") String accountNumber){
+        return accountService.getAccountByAccountNumber(accountNumber);
+    }
+
     @GetMapping("de-activate/{AccountNumber}")
     public AccountResponse deactivateAccount(@PathVariable String AccountNumber) {
         return accountService.deActivateAccount(AccountNumber);
