@@ -1,5 +1,6 @@
 package com.hubb.hijra.bankachin.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class CustomerLedger {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIgnore
     @JoinColumn(name = "account_id", nullable = false)
     private Accounts account;
 
@@ -41,6 +43,7 @@ public class CustomerLedger {
     @Column()
     private String description;
 
+    @CreatedDate
     @Column(nullable = false)
     private LocalDateTime transactionDate;
 

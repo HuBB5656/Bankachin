@@ -2,7 +2,9 @@ package com.hubb.hijra.bankachin.services;
 
 
 import com.hubb.hijra.bankachin.controllers.dto.AccountResponse;
+import com.hubb.hijra.bankachin.controllers.dto.CustomerLedgerRequests;
 import com.hubb.hijra.bankachin.models.Accounts;
+import com.hubb.hijra.bankachin.models.CustomerLedger;
 import com.hubb.hijra.bankachin.repositories.AccountRepositories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.List;
 public class AccountService {
 
     private final AccountRepositories accountRepositories;
+    private  final CustomerLedgerService customerLedgerService;
 
     public List<Accounts> getAccounts() {
 
@@ -34,7 +37,7 @@ public class AccountService {
 
     }
 //     update customer balance
-    public AccountResponse updateAccountBalance(String accountNumber, BigDecimal amount, String direction){
+    public AccountResponse updateAccountBalance(String accountNumber, BigDecimal amount, String direction,String referenceNumber){
         Accounts account = accountRepositories.findByAccountNumber(accountNumber).orElseThrow(()-> new RuntimeException("account not found"));
 
         if(!"Active".equals(account.getAccountStatus())){
@@ -57,7 +60,17 @@ public class AccountService {
         }
 
         account.setBalance(balanceAfter);
+
         accountRepositories.save(account);
+        CustomerLedger customerLedger = new CustomerLedger();
+        customerLedger.setReference(referenceNumber);
+        customerLedger.setAccount(account);
+        customerLedger.setBalanceBefore(balanceBefore);
+        customerLedger.setAmount(amount);
+        customerLedger.setBalanceAfter(balanceAfter);
+        customerLedger.setDescription("Account Number " + account.getAccountNumber()+ " " + direction +  " with " + amount );
+
+        customerLedgerService.createTrancastionRow(customerLedger);
 
         return new  AccountResponse(account);
     }
