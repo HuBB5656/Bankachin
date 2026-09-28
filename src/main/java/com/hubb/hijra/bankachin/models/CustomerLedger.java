@@ -38,7 +38,7 @@ public class CustomerLedger {
     @Column(nullable = false, length = 100)
     private String reference;
 
-    @Column(nullable = false, length = 255)
+    @Column()
     private String description;
 
     @Column(nullable = false)
