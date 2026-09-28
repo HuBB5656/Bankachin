@@ -17,4 +17,4 @@ spring:
         format_sql: true
 
 server:
-  port: 7000
+  port: 7001
